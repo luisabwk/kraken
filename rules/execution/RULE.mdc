@@ -1,0 +1,39 @@
+---
+description: "This file provides guides to keep the execution of the project organized and easy to keep track and use."
+alwaysApply: true
+---
+# Plan and Task Execution
+
+> Use this file when you need to execute any task belonging to a plan/project. 
+
+## Worktree
+
+First of all: you must create the respective folder to the plan (in `/plans`). This is our structure: 
+
+```
+.
+├── .cursor/
+│   ├── commands/
+│   │   ├── boot.md
+│   │   ├── code-review.md
+│   │   └── commit.md
+│   └── rules/
+│       ├── execution/
+│       ├── plan/
+│       ├── prd/
+│       ├── stack/
+│       └── task/
+├── plans/
+├── projects/
+│   ├── dataAnalysis/
+│   ├── emailTemplates/
+│   └── PRDs/
+└── tasks/
+    └── [plan name]/
+        ├── 000 - Task title goes here and it is objective, but not too long.md
+        └── 001 - Task title goes here and it is objective, but not too long.md
+```
+
+## Rules and directions
+
+You must ALWAYS check the rules we have set at `.cursor/rules`. 

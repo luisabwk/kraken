@@ -1,0 +1,48 @@
+---
+description: "This rule provides instructions for creating tasks related to projects and plans asked by the user"
+alwaysApply: true
+---
+# Task writing and management
+
+> Check this rule to understand how to create and manage tasks for our plans, they are kept in `/plans`.
+
+The tasks must be created at `/tasks`, organized by project/plan. You must always create a new folder to group tasks related to a specific plan/project. 
+
+After you create the tasks inside its specific folder, you have to update the plan section reserved for task listing. 
+
+## Task origin 
+
+The tasks you'll be creating are derived from the markdown files in `/plans`. They have the SOP and directives you need to organize the excution of what we're aiming to build here. 
+
+## Task structure
+
+Every task you create must contain the full description and documentation to allow the best execution possible. Each task is like a tiny project by itself. But make no mistake: if the task gets too big or complex, maybe it is time to break it in smaller ones. 
+
+### Task title
+
+Use this template to create the .md files for the tasks, inside the `/task/[plan]` folder: 
+
+```
+000 - Task title goes here and it is objective, but not too long.md
+```
+
+### Task content
+
+The content of the file must obey the outline below: 
+
+1. Title (repeat it in the file body) 
+1.1 Task status (To do / In process/ Done / Canceled)
+2. Goal (What is the main objective of the task)
+3. Rules and constraints (What are the mandatory steps and dos and donts)
+4. Steps / Subtasks (specify what is to be done in a structured and objective way)
+5. Notes (include links, decisions, documentation and anything that might help track progress of the project)
+
+## Task statuses
+
+To keep things simple and keep track of what is running and what is not, you must ALWAYS keep statuses updated inside the plan related to the task AND also in the `1.1 Task status` item of the .md task document. 
+
+The statuses are: 
+- To do (Our backlog. Must remain unchecked at the plan file.)
+- In process (Whenever you're working on a file, change the status to reflect this)
+- Done (After you reviewed the output of the task and it is satisfatory, consider it done. Must remain checked at the plan file.)
+- Canceled (If the task gets deprioritized or we figure that it is not needed anymore, mark it as canceled.)

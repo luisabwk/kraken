@@ -1,232 +1,232 @@
-# Kraken 🐙
+# 🦑 Kraken
 
-A structured AI agent framework for Cursor IDE that maximizes reliability through separation of concerns.
+> **Release the Kraken!** — Unleash reliable AI agents with a battle-tested 3-layer architecture.
 
-## 🏗️ Architecture
+Stop letting your AI agent run wild. Kraken brings order to chaos with a proven framework that separates what to do, how to decide, and how to execute.
 
-This system follows a **3-layer architecture** to maximize reliability:
+---
 
-| Layer | Location | Purpose |
-|-------|----------|----------|
-| **Directive** | `/vaults/<area>/projects/<project>/plans/` | SOPs and instructions in Markdown |
-| **Orchestration** | AI Agent | Intelligent routing and decision-making |
-| **Execution** | `/vaults/<area>/projects/<project>/execution/` | Deterministic scripts (Python, TypeScript, JavaScript) |
+## Why Kraken?
 
-**Why this works 💡**: LLMs are probabilistic, but business logic requires consistency. By pushing complexity into deterministic code, the agent focuses on decision-making while execution remains reliable.
+LLMs are probabilistic. Your business logic shouldn't be.
+
+```
+90% accuracy per step = 59% success over 5 steps
+80% accuracy per step = 33% success over 5 steps
+```
+
+**The solution?** Push complexity into deterministic code. Let the AI focus on decisions, not execution.
+
+---
+
+## 🏗️ The 3-Layer Architecture
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  LAYER 1: DIRECTIVE (What to do)                            │
+│  Location: /vaults/<area>/projects/<project>/plans/          │
+│  Content: SOPs in Markdown - goals, inputs, tools, outputs  │
+└─────────────────────────────────────────────────────────────┘
+                              ↓
+┌─────────────────────────────────────────────────────────────┐
+│  LAYER 2: ORCHESTRATION (Decision making)                   │
+│  Actor: AI Agent                                            │
+│  Role: Read directives, call tools, handle errors, learn    │
+└─────────────────────────────────────────────────────────────┘
+                              ↓
+┌─────────────────────────────────────────────────────────────┐
+│  LAYER 3: EXECUTION (Doing the work)                        │
+│  Location: /vaults/<area>/projects/<project>/execution/      │
+│  Content: Deterministic scripts (Python, TypeScript, JS)    │
+└─────────────────────────────────────────────────────────────┘
+```
+
+| Layer | What it does | Who owns it |
+|-------|--------------|-------------|
+| **Directive** | Defines goals and instructions | You (in Markdown) |
+| **Orchestration** | Makes decisions, routes work | AI Agent |
+| **Execution** | Runs deterministic code | Scripts you control |
+
+---
 
 ## 📁 Project Structure
 
 ```
 kraken/
 ├── .cursor/
-│   ├── commands/           # Custom commands
-│   │   ├── boot.md         # Initialize agent
-│   │   ├── code-review.md  # Quality checklist
-│   │   ├── commit.md       # Git commit guide
-│   │   ├── execute.md      # Task execution
-│   │   ├── prp-new.md      # Create new PRP
-│   │   └── prp-review.md   # Review existing PRP
+│   ├── commands/           # Custom slash commands
+│   │   ├── boot.md         # /boot - Initialize agent
+│   │   ├── code-review.md  # /code-review - Quality checklist
+│   │   ├── commit.md       # /commit - Proper git commits
+│   │   ├── execute.md      # /execute - Run tasks
+│   │   ├── mcp.md          # /mcp - Manage MCP modes
+│   │   ├── prp-new.md      # /prp-new - Create PRPs
+│   │   ├── prp-review.md   # /prp-review - Review PRPs
+│   │   └── run.md          # /run - Execute scripts
 │   ├── hooks/              # Behavioral guardrails
 │   │   ├── block-dangerous-commands.md
 │   │   ├── warn-debug-code.md
 │   │   ├── warn-hardcoded-secrets.md
-│   │   └── ... (8 hooks total)
+│   │   └── ... (9 hooks total)
 │   └── rules/              # Operating rules
-│       ├── code-simplifier/         # Code cleanup guidelines
-│       ├── execution/               # How to execute tasks
-│       ├── plan/                    # How to create plans
-│       ├── prd/                     # PRP creation guide
-│       ├── stack/                   # Technology preferences
-│       ├── systematic-debugging/    # 4-phase debugging process
-│       ├── task/                    # Task management
-│       └── test-driven-development/ # TDD workflow
-├── .tmp/                   # Temporary files (not committed)
-├── vaults/                 # Workspaces
-│   ├── work/
-│   │   └── projects/       # Work projects
-│   └── personal/
-│       └── projects/       # Personal projects
-├── .env                    # Environment variables (not committed)
+│       ├── plan/           # How to create plans
+│       ├── task/           # Task management
+│       ├── execution/      # How to execute
+│       ├── prd/            # PRP creation guide
+│       ├── stack/          # Tech preferences
+│       ├── mcp-modes/      # MCP optimization
+│       ├── code-simplifier/
+│       ├── systematic-debugging/
+│       ├── test-driven-development/
+│       └── documentation-standards/
+├── vaults/                 # Your workspaces
+│   ├── AGENTS.md           # Vault-level instructions
+│   ├── work/projects/      # Work projects
+│   └── personal/projects/  # Personal projects
 ├── .gitignore
-├── AGENTS.md               # Agent operating instructions
+├── AGENTS.md               # Root agent instructions
 └── README.md
 ```
+
+---
 
 ## 🚀 Quick Start
 
 ### Prerequisites
 
+- [Cursor IDE](https://cursor.sh) with MCP support
 - Node.js >= 18.x LTS
 - Python >= 3.10
-- Cursor IDE with MCP support
 - Git
 
-### Initial Setup
+### Setup
 
-1. **Clone the repository**
+1. **Clone the repo**
    ```bash
-   git clone https://github.com/YOUR_USERNAME/kraken.git
+   git clone https://github.com/luisabwk/kraken.git
    cd kraken
    ```
 
-2. **Configure environment**
+2. **Configure your environment**
    ```bash
-   cp .env.example .env  # If template exists
-   # Edit .env with your API keys and credentials
+   cp .env.example .env  # If needed
+   # Add your API keys
    ```
 
-3. **Configure MCP servers** (optional)
-   - Open Cursor settings
-   - Add the MCP servers you need (see [MCP Servers](#-mcp-servers))
-
-4. **Boot the agent**
+3. **Release the Kraken!**
    ```
    /boot
    ```
 
-### Commands
+---
 
-| Command | Purpose |
-|---------|---------|
-| `/boot` | Initialize agent and verify setup |
+## 🎮 Commands
+
+| Command | What it does |
+|---------|--------------|
+| `/boot` | Initialize agent, verify setup |
 | `/execute` | Run task execution workflow |
 | `/code-review` | Quality assurance checklist |
 | `/commit` | Git commit with proper format |
-| `/prp-new` | Create new Product Requirement Prompt |
+| `/prp-new` | Create Product Requirement Prompt |
 | `/prp-review` | Review existing PRP |
+| `/mcp` | Switch MCP modes (minimal/dev/full) |
+| `/run` | Execute specific scripts |
 
-## 🛠️ Tech Stack
+---
 
-### Languages & Frameworks
-| Use Case | Technology |
-|----------|------------|
-| Data Analysis | Python 3.11+ |
-| Web Apps | Next.js 14+ with TypeScript |
-| UI Components | shadcn/ui + Tailwind CSS |
-| Databases | Supabase (PostgreSQL), MongoDB |
+## 🛡️ Hooks (Guardrails)
 
-### Recommended Versions
-```
-Node.js:    >= 18.x LTS (20.x recommended)
-Python:     >= 3.10 (3.11+ recommended)
-npm:        >= 9.x
-TypeScript: >= 5.x
-Next.js:    >= 14.x
-```
+Kraken includes behavioral hooks that prevent common mistakes:
 
-## 🔧 MCP Servers (Optional)
+| Hook | What it catches |
+|------|-----------------|
+| `block-dangerous-commands` | `rm -rf`, `DROP TABLE`, etc. |
+| `warn-debug-code` | `console.log`, `debugger`, `print()` |
+| `warn-hardcoded-secrets` | API keys, passwords in code |
+| `warn-large-files` | Files > 500 lines |
+| `warn-any-type` | TypeScript `any` usage |
+| `require-tests` | Missing test files |
+| `warn-env-commit` | `.env` files being committed |
+| `warn-todo-comments` | Unresolved TODOs |
 
-Configure based on your needs. The agent can work without MCPs, but they enhance capabilities.
+---
 
-| Server | Purpose | Use Case |
-|--------|---------|----------|
-| `context7` | Library documentation | Check package safety |
-| `supermemory` | Memory and context storage | Store/retrieve learnings |
-| `github` | Repository management | Commits, PRs, branches |
-| `linear` | Issue tracking | Project management |
-| `notion` | Documentation | Meeting notes, docs |
-| `supabase` | Database management | Tables, auth, storage |
+## 🧠 Self-Annealing
 
-### MCP Modes
-
-The agent supports different modes to optimize context usage:
-
-| Mode | MCPs Active | Use Case |
-|------|-------------|----------|
-| `minimal` | None | Simple conversations |
-| `dev` | context7, semgrep, shadcn | Development |
-| `infra` | Railway, supabase, github | Deploy/Infra |
-| `pm` | Linear, Notion, Slack, supermemory | Product Management |
-| `full` | All | When you need everything |
-
-## 📋 Workflow
+Kraken gets smarter over time:
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                         WORKFLOW                                 │
-├─────────────────────────────────────────────────────────────────┤
-│  USER                              AGENT                        │
-│  ────                              ─────                        │
-│  New request              →        Analyze (plan + stack rules) │
-│                           ←        Create plan in vaults/.../plans/ │
-│  Review + feedback        →                                     │
-│                           ←        Polish plan (if needed)      │
-│  Approve plan             →                                     │
-│                           ←        Create tasks in vaults/.../tasks/ │
-│  Review tasks             →                                     │
-│  /execute                 →                                     │
-│                           ←        Execute + /code-review       │
-│  Test + feedback          →                                     │
-│                           ←        Iterate until complete       │
-└─────────────────────────────────────────────────────────────────┘
+Error occurs
+    ↓
+Fix the issue
+    ↓
+Update the tool
+    ↓
+Test the tool
+    ↓
+Update directive
+    ↓
+System is now stronger
 ```
 
-## 🧠 Memory System (Optional)
+When something breaks, the agent learns and updates the directives so it doesn't happen again.
 
-If using Supermemory MCP, the agent can store:
-- Project learnings and decisions
-- PRD/PRP insights
-- Workflow patterns
-- Error resolutions
+---
 
-**Tip**: Always check memory before starting work to avoid repeated errors.
+## 📋 Creating a New Project
+
+```bash
+# Create project structure
+mkdir -p vaults/work/projects/my-project/{plans,tasks,execution,project}
+
+# Add project-specific AGENTS.md
+touch vaults/work/projects/my-project/AGENTS.md
+```
+
+Then create your first plan in `plans/` and let the Kraken take it from there.
+
+---
+
+## 🎯 Operating Principles
+
+1. **Check for tools first** — Reuse before creating
+2. **Self-anneal** — Learn from errors, update directives
+3. **KISS** — Keep It Simple, Stupid
+4. **YAGNI** — You Ain't Gonna Need It
+5. **DRY** — Don't Repeat Yourself
+6. **TDD** — Red → Green → Refactor
+7. **Systematic debugging** — Find root cause first
+
+---
 
 ## 📚 Documentation
 
 | Document | Purpose |
 |----------|---------|
-| [AGENTS.md](./AGENTS.md) | Agent operating instructions |
-| [Plan Rules](./.cursor/rules/plan/RULE.md) | How to create plans |
-| [Task Rules](./.cursor/rules/task/RULE.md) | Task creation and management |
-| [Execution Rules](./.cursor/rules/execution/RULE.md) | How to execute tasks |
-| [PRD Rules](./.cursor/rules/prd/RULE.md) | PRP creation guide |
-| [Stack Rules](./.cursor/rules/stack/RULE.md) | Technology preferences |
-| [Debugging Rules](./.cursor/rules/systematic-debugging/RULE.md) | 4-phase debugging process |
-| [TDD Rules](./.cursor/rules/test-driven-development/RULE.md) | Test-driven development |
-| [Code Simplifier](./.cursor/rules/code-simplifier/RULE.md) | Code cleanup guidelines |
-| [Hooks](./.cursor/hooks/README.md) | Behavioral guardrails |
-
-## 🎯 Operating Principles
-
-1. **Check for tools first** - Reuse existing scripts before creating new ones
-2. **Self-anneal** - Learn from errors and update directives
-3. **Update directives** - Living documents that improve over time
-4. **KISS** - Keep solutions simple and focused
-5. **YAGNI** - Don't build for hypothetical future needs
-6. **DRY** - Don't repeat yourself
-7. **TDD** - Write tests first, watch them fail, then implement
-8. **Systematic debugging** - Find root cause before fixing
-
-## 🤝 Getting Started with Projects
-
-1. Create a project folder in `/vaults/<area>/projects/<project-name>/`
-2. Add subfolders: `plans/`, `tasks/`, `execution/`, `project/`
-3. Create your first plan in `plans/`
-4. Run `/execute` to start working
-
-### Example Project Structure
-
-```
-vaults/
-└── work/
-    └── projects/
-        └── my-app/
-            ├── plans/
-            │   └── 001 - Initial Setup - 2026-01-13.md
-            ├── tasks/
-            │   └── my-app/
-            │       ├── 000 - Setup project.md
-            │       └── 001 - Implement feature.md
-            ├── execution/
-            │   └── scripts/
-            └── project/
-                └── src/
-```
-
-## 📄 License
-
-MIT License - Feel free to use, modify, and distribute.
+| [AGENTS.md](./AGENTS.md) | Root agent instructions |
+| [vaults/AGENTS.md](./vaults/AGENTS.md) | MCP modes & vault rules |
+| [.cursor/hooks/README.md](./.cursor/hooks/README.md) | Hook documentation |
 
 ---
 
-**Built with 🐙 for AI-assisted development**
+## 🤝 Contributing
+
+1. Fork the repo
+2. Create your feature branch
+3. Follow the 3-layer architecture
+4. Run `/code-review` before submitting
+5. Use `/commit` for proper commit messages
+
+---
+
+## 📜 License
+
+MIT — Go wild. Release your Kraken. 🦑
+
+---
+
+<p align="center">
+  <strong>🦑 Release the Kraken!</strong><br>
+  <em>Tame the chaos. Ship with confidence.</em>
+</p>

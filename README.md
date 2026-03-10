@@ -71,18 +71,32 @@ kraken/
 │   │   ├── warn-hardcoded-secrets.md
 │   │   ├── warn-long-output.md
 │   │   └── ... (10 hooks total)
-│   └── rules/              # Operating rules
-│       ├── plan/           # How to create plans
-│       ├── task/           # Task management
-│       ├── execution/      # How to execute
-│       ├── prd/            # PRP creation guide
-│       ├── stack/          # Tech preferences
-│       ├── mcp-modes/      # MCP optimization
-│       ├── dynamic-context/  # Context window management
+│   ├── rules/              # Operating rules
+│   │   ├── plan/           # How to create plans
+│   │   ├── task/           # Task management
+│   │   ├── execution/      # How to execute
+│   │   ├── prd/            # PRP creation guide
+│   │   ├── stack/          # Tech preferences
+│   │   ├── mcp-modes/      # MCP optimization
+│   │   ├── dynamic-context/  # Context window management
+│   │   ├── code-simplifier/
+│   │   ├── systematic-debugging/
+│   │   ├── test-driven-development/
+│   │   └── documentation-standards/
+│   └── skills/             # Detailed procedural skills
 │       ├── code-simplifier/
+│       ├── documentation-standards/
+│       ├── dynamic-context/
+│       ├── execution/
+│       ├── memory-awareness/
+│       ├── mcp-modes/
+│       ├── plan/
+│       ├── prd/
+│       ├── skill-creator/    # Meta-skill: create new skills
+│       ├── stack/
 │       ├── systematic-debugging/
-│       ├── test-driven-development/
-│       └── documentation-standards/
+│       ├── task/
+│       └── test-driven-development/
 ├── context/                # Dynamic context storage
 │   ├── mcp/                # Long MCP responses
 │   ├── history/            # Session persistence
@@ -228,6 +242,35 @@ Then create your first plan in `plans/` and let the Kraken take it from there.
 
 ---
 
+## 🧩 Skills
+
+Skills are detailed procedural guides that extend the agent's capabilities. While rules provide short, always-on guardrails, skills provide in-depth workflows loaded on-demand.
+
+| Skill | What it does |
+|-------|--------------|
+| `code-simplifier` | Simplify and refine code after implementation |
+| `documentation-standards` | Ensure consistent structural docs |
+| `dynamic-context` | Manage context window efficiently |
+| `execution` | Step-by-step task execution workflow |
+| `memory-awareness` | Proactive memory usage across sessions |
+| `mcp-modes` | Optimize which MCPs to use |
+| `plan` | Create structured project plans |
+| `prd` | Create PRPs and break into tasks |
+| `skill-creator` | Create new skills (meta-skill) |
+| `stack` | Technology choices and setup |
+| `systematic-debugging` | Find root cause before fixing |
+| `task` | Create and manage task files |
+| `test-driven-development` | Red → Green → Refactor cycle |
+
+### Creating New Skills
+
+Use the `skill-creator` skill to create your own:
+```bash
+python3 .cursor/skills/skill-creator/scripts/init_skill.py my-skill --path .cursor/skills/
+```
+
+---
+
 ## 🎯 Operating Principles
 
 1. **Check for tools first** — Reuse before creating
@@ -249,6 +292,7 @@ Then create your first plan in `plans/` and let the Kraken take it from there.
 | [vaults/AGENTS.md](./vaults/AGENTS.md) | Vault structure & MCP modes |
 | [context/README.md](./context/README.md) | Dynamic context system |
 | [.cursor/hooks/README.md](./.cursor/hooks/README.md) | Hook documentation |
+| [.cursor/skills/](./.cursor/skills/) | Skill library |
 
 ---
 

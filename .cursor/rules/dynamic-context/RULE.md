@@ -156,6 +156,11 @@ grep -i "error\|warn" ./context/terminal/build_*.txt
 - Redirect verbose outputs to `/context/terminal/`
 - Apply Rule 03 after completing significant tasks
 
+### With Skills (`.cursor/skills/`)
+- Skills provide detailed procedures that complement rules
+- Skills are loaded on-demand when the agent detects a matching context
+- See `.cursor/skills/` for available skills
+
 ## Cleanup Policy
 
 ```bash

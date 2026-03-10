@@ -56,18 +56,21 @@ kraken/
 ├── .cursor/
 │   ├── commands/           # Custom slash commands
 │   │   ├── boot.md         # /boot - Initialize agent
+│   │   ├── clean.md        # /clean - Repository hygiene
 │   │   ├── code-review.md  # /code-review - Quality checklist
 │   │   ├── commit.md       # /commit - Proper git commits
+│   │   ├── context.md      # /context - Dynamic context management
 │   │   ├── execute.md      # /execute - Run tasks
 │   │   ├── mcp.md          # /mcp - Manage MCP modes
 │   │   ├── prp-new.md      # /prp-new - Create PRPs
 │   │   ├── prp-review.md   # /prp-review - Review PRPs
 │   │   └── run.md          # /run - Execute scripts
-│   ├── hooks/              # Behavioral guardrails
+│   ├── hooks/              # Behavioral guardrails (10 hooks)
 │   │   ├── block-dangerous-commands.md
 │   │   ├── warn-debug-code.md
 │   │   ├── warn-hardcoded-secrets.md
-│   │   └── ... (9 hooks total)
+│   │   ├── warn-long-output.md
+│   │   └── ... (10 hooks total)
 │   └── rules/              # Operating rules
 │       ├── plan/           # How to create plans
 │       ├── task/           # Task management
@@ -75,13 +78,21 @@ kraken/
 │       ├── prd/            # PRP creation guide
 │       ├── stack/          # Tech preferences
 │       ├── mcp-modes/      # MCP optimization
+│       ├── dynamic-context/  # Context window management
 │       ├── code-simplifier/
 │       ├── systematic-debugging/
 │       ├── test-driven-development/
 │       └── documentation-standards/
+├── context/                # Dynamic context storage
+│   ├── mcp/                # Long MCP responses
+│   ├── history/            # Session persistence
+│   └── terminal/           # Execution logs
 ├── vaults/                 # Your workspaces
 │   ├── AGENTS.md           # Vault-level instructions
-│   ├── work/projects/      # Work projects
+│   ├── work/
+│   │   ├── projects/       # Full initiatives
+│   │   ├── data/           # Data pipelines and reports
+│   │   └── apps/           # Deployable services
 │   └── personal/projects/  # Personal projects
 ├── .gitignore
 ├── AGENTS.md               # Root agent instructions
@@ -132,6 +143,8 @@ kraken/
 | `/prp-review` | Review existing PRP |
 | `/mcp` | Switch MCP modes (minimal/dev/full) |
 | `/run` | Execute specific scripts |
+| `/context` | Manage dynamic context (status/clean/log) |
+| `/clean` | Repository hygiene and maintenance |
 
 ---
 
@@ -149,6 +162,7 @@ Kraken includes behavioral hooks that prevent common mistakes:
 | `require-tests` | Missing test files |
 | `warn-env-commit` | `.env` files being committed |
 | `warn-todo-comments` | Unresolved TODOs |
+| `warn-long-output` | Command output > 50 lines (context bloat) |
 
 ---
 
@@ -174,6 +188,24 @@ When something breaks, the agent learns and updates the directives so it doesn't
 
 ---
 
+## 📦 Dynamic Context Management
+
+LLM context windows fill up fast. Kraken includes a built-in system to manage this:
+
+- **Long outputs** (>50 lines) are saved to `context/` instead of cluttering chat
+- **Session history** persists decisions across auto-compaction
+- **Terminal logs** are redirected for selective retrieval
+
+```
+/context status   → See usage
+/context clean    → Remove old files
+/context log      → Record a decision
+```
+
+See `.cursor/rules/dynamic-context/RULE.md` for the full system.
+
+---
+
 ## 📋 Creating a New Project
 
 ```bash
@@ -186,6 +218,14 @@ touch vaults/work/projects/my-project/AGENTS.md
 
 Then create your first plan in `plans/` and let the Kraken take it from there.
 
+### Vault Categories
+
+| Category | Path | Use for |
+|----------|------|---------|
+| **projects/** | `vaults/<area>/projects/` | Full initiatives with plans, tasks, execution |
+| **data/** | `vaults/<area>/data/` | Data pipelines, reports, datasets |
+| **apps/** | `vaults/<area>/apps/` | Deployable apps and services |
+
 ---
 
 ## 🎯 Operating Principles
@@ -197,6 +237,7 @@ Then create your first plan in `plans/` and let the Kraken take it from there.
 5. **DRY** — Don't Repeat Yourself
 6. **TDD** — Red → Green → Refactor
 7. **Systematic debugging** — Find root cause first
+8. **Manage context** — Offload verbose data, retrieve selectively
 
 ---
 
@@ -205,7 +246,8 @@ Then create your first plan in `plans/` and let the Kraken take it from there.
 | Document | Purpose |
 |----------|---------|
 | [AGENTS.md](./AGENTS.md) | Root agent instructions |
-| [vaults/AGENTS.md](./vaults/AGENTS.md) | MCP modes & vault rules |
+| [vaults/AGENTS.md](./vaults/AGENTS.md) | Vault structure & MCP modes |
+| [context/README.md](./context/README.md) | Dynamic context system |
 | [.cursor/hooks/README.md](./.cursor/hooks/README.md) | Hook documentation |
 
 ---

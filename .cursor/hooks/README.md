@@ -47,7 +47,7 @@ Message to display when hook triggers.
 ## Active Hooks
 
 | Hook | Event | Action | Purpose |
-|------|-------|--------|----------|
+|------|-------|--------|---------|
 | `block-dangerous-commands` | bash | block | Prevent destructive commands |
 | `warn-debug-code` | file | warn | Detect console.log, debugger |
 | `warn-hardcoded-secrets` | file | warn | Detect API keys in code |
@@ -55,6 +55,8 @@ Message to display when hook triggers.
 | `warn-any-type` | file | warn | TypeScript `any` usage |
 | `require-tests` | stop | warn | Remind to run tests |
 | `warn-env-commit` | commit | block | Prevent .env commits |
+| `warn-todo-comments` | file | warn | Unresolved TODOs |
+| `warn-long-output` | bash | warn | Output > 50 lines, save to /context/ |
 
 ## Usage Guidelines
 

@@ -7,13 +7,32 @@ This directory contains **separated workspaces** (e.g. `work`, `personal`) and e
 ```
 vaults/
 └── <area>/
-    └── projects/
-        └── <project>/
-            ├── plans/       # Plans and PRPs
-            ├── tasks/       # Task breakdowns and notes
-            ├── execution/   # Deterministic scripts (tools)
-            └── project/     # Code, assets, datasets, outputs
+    ├── projects/     # Full initiatives (plans, tasks, execution, deliverables)
+    │   └── <project>/
+    │       ├── plans/       # Plans and PRPs
+    │       ├── tasks/       # Task breakdowns and notes
+    │       ├── execution/   # Deterministic scripts (tools)
+    │       ├── project/     # Code, assets, datasets, outputs
+    │       └── service/     # Optional: app code when project is a deployable service
+    ├── data/         # Data pipelines, reports (execution + project outputs; optional plans)
+    │   └── <name>/
+    │       ├── execution/
+    │       └── project/
+    └── apps/         # Deployable apps and small services (may use service/ and/or execution/)
+        └── <name>/
 ```
+
+**Project convention**: Any folder with `execution/` should have at least `plans/`, `tasks/`, or a README explaining the scripts.
+
+### When to Use Each Category
+
+| Under `vaults/<area>/` | Use for | Typical structure |
+|------------------------|---------|-------------------|
+| **projects/** | Full initiatives with plans, tasks, execution, and deliverables | `plans/`, `tasks/`, `execution/`, `project/` |
+| **data/** | Data pipelines, reports, and scripts that produce datasets | `execution/`, `project/`, optional `plans/` |
+| **apps/** | Deployable apps and small services | App code + optional `execution/`, `plans/` |
+
+**Rule of thumb**: If it has **execution scripts + a clear project scope**, add at least a README. Prefer **projects/** when there are plans and tasks; use **data/** for pipeline-focused work and **apps/** for deployable services.
 
 ## General Rules
 
@@ -29,6 +48,12 @@ vaults/
 3. Initialize dependencies inside `project/` (e.g. `package.json`, `requirements.txt`).
 4. Create your plan inside `plans/`.
 5. **Define MCP Mode** in the project's `AGENTS.md`.
+
+Or use the shortcut:
+```bash
+mkdir -p vaults/<area>/projects/<name>/{plans,tasks,execution,project}
+touch vaults/<area>/projects/<name>/AGENTS.md
+```
 
 ## MCP Modes
 

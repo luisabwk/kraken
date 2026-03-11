@@ -1,11 +1,11 @@
 ---
 name: prd-writer
-description: "Guide users through writing effective Product Requirements Documents (PRDs) using frameworks from top PMs. Use when creating a PRD, product requirements document, product spec, product one-pager, feature brief, or when someone needs to document what to build and why."
+description: "Guide users through writing Product Requirements Documents (PRDs) and decomposing them into executable technical tasks. Use when creating a PRD, product spec, product one-pager, feature brief, PRP, or when breaking requirements into tasks with estimates, sprint planning, or technical decomposition."
 ---
 
-# PRD Writer
+# PRD Writer & Task Decomposition
 
-Write PRDs that connect business goals to product decisions. A PRD is not a feature list — it is a strategic document that aligns a team around a problem worth solving, the evidence behind it, and what success looks like.
+Write PRDs that connect business goals to product decisions, then decompose them into executable technical tasks. A PRD is not a feature list — it is a strategic document that aligns a team around a problem worth solving, the evidence behind it, and what success looks like.
 
 ## Core Principles
 
@@ -47,8 +47,6 @@ Last updated: [Date]
 Reviewers:    [Engineering lead, Design lead, key stakeholders]
 ```
 
----
-
 ### 1. Problem Statement
 
 Write 2-4 paragraphs that answer:
@@ -62,16 +60,14 @@ Write 2-4 paragraphs that answer:
 
 - Use customer quotes, support ticket data, or usage metrics as evidence.
 - Avoid embedding your solution in the problem statement. "Users need a dashboard" is a solution. "Users cannot see their progress toward monthly goals" is a problem.
-- If the problem came from a stakeholder request, translate the request into the underlying need: "Sales asked for X" → "Customers in segment Y are churning because of Z."
+- If the problem came from a stakeholder request, translate the request into the underlying need.
 
-**Questions to ask the user:**
+**Ask the user:**
 
 1. "Who specifically is experiencing this problem?"
 2. "How do you know this is a real problem? What evidence do you have?"
 3. "What are people doing today to work around this?"
 4. "Why is this the right time to solve it?"
-
----
 
 ### 2. Goals and Success Metrics
 
@@ -85,68 +81,44 @@ Define 2-4 measurable outcomes. Each goal needs a metric, a baseline, and a targ
 **Guidance:**
 
 - Distinguish **leading indicators** (engagement, adoption) from **lagging indicators** (revenue, churn). Include both.
-- Ask: "If we ship this and the metrics don't move, was it a failure?" If yes, the metrics are right. If not, find better ones.
+- Ask: "If we ship this and the metrics don't move, was it a failure?" If yes, the metrics are right.
+- Include a **guardrail metric** — something that should NOT get worse.
 - Avoid vanity metrics (page views, signups without activation).
-- Include a **guardrail metric** — something that should NOT get worse (e.g., "page load time stays under 2s").
 
-**Questions to ask the user:**
+**Ask the user:**
 
 1. "What do we hope will happen when we release this?"
 2. "How will you measure whether this worked?"
 3. "What metric should definitely NOT get worse?"
-4. "When will you evaluate results — 30, 60, or 90 days?"
-
----
 
 ### 3. User Stories and Use Cases
 
-Write 3-8 user stories in the format:
+Write 3-8 user stories:
 
 > **As a** [specific user persona], **I want to** [action], **so that** [outcome/value].
 
-Then expand the top 2-3 stories into brief use cases:
+Expand the top 2-3 stories into brief use cases:
 
 ```
 Use Case: [Name]
 Actor:     [Persona]
 Trigger:   [What initiates this flow]
-Flow:
-  1. User does X
-  2. System responds with Y
-  3. User sees Z
+Flow:      1. User does X → 2. System responds with Y → 3. User sees Z
 Success:   [What "done" looks like for this user]
 Edge case: [What could go wrong]
 ```
 
-**Guidance:**
-
-- Ground stories in real customer interviews or observed behavior, not hypothetical personas.
-- Prioritize stories by frequency and impact. Mark which are P0 (must-have) vs P1 (should-have) vs P2 (nice-to-have).
-- If you have no real user research yet, flag the stories as assumptions and propose a validation plan.
-
-**Questions to ask the user:**
-
-1. "Can you walk me through a real user's journey with this problem today?"
-2. "What are the 2-3 most common scenarios?"
-3. "What's the edge case you're most worried about?"
-
----
+Prioritize stories by frequency and impact. Mark P0 (must-have) vs P1 (should-have) vs P2 (nice-to-have).
 
 ### 4. Proposed Solution
 
-Describe the high-level approach. This is NOT a spec — it is a direction.
+Describe the high-level approach (NOT a spec — a direction):
 
 - **What** are we building? (1-2 paragraph overview)
-- **Why this approach?** (what alternatives were considered and why they were rejected)
+- **Why this approach?** (alternatives considered and why rejected)
 - **Key design decisions** already made and their rationale
 
-**Guidance:**
-
-- Include rough wireframes, mockups, or flow diagrams if available — visual alignment is faster than written alignment.
-- Call out what is intentionally NOT included in v1.
-- If the solution is not yet defined, describe the discovery plan instead: what experiments, prototypes, or research will inform the solution.
-
----
+Include rough wireframes or flow diagrams if available. Call out what is intentionally NOT included in v1.
 
 ### 5. Scope and Non-Goals
 
@@ -156,54 +128,49 @@ Describe the high-level approach. This is NOT a spec — it is a direction.
 - [ ] Capability 3
 
 **Non-Goals (explicitly out of scope):**
-- NOT: [thing that someone might assume is included]
+- NOT: [thing someone might assume is included]
 - NOT: [future version capability]
 - NOT: [adjacent problem we are not solving]
 
-**Guidance:**
+Be specific: "Not building admin dashboard" is better than "Not building extra features."
 
-- Non-Goals prevent scope creep. Be specific: "Not building admin dashboard" is better than "Not building extra features."
-- If a stakeholder keeps pushing for something in Non-Goals, escalate it as a separate initiative rather than expanding this PRD.
-- Revisit scope when the team estimates effort. If the scope exceeds the available time, cut from the bottom of the priority list, not from quality.
+### 6. Constraints and Architecture Decisions
 
----
+| Constraint | Value |
+|-----------|-------|
+| **Deadline** | [date/period or "Not specified"] |
+| **Budget** | [hours/cost or "Not specified"] |
+| **Technology** | [stack/restrictions or "Not specified"] |
+| **Dependencies** | [systems/teams or "Not specified"] |
+| **Quality** | [standards or "Not specified"] |
 
-### 6. Dependencies and Risks
+**Architecture Decisions** (optional):
+
+| Decision | Alternatives | Reason |
+|----------|-------------|--------|
+| [Choice made] | [Options considered] | [Why this choice] |
+
+### 7. Dependencies and Risks
 
 | Dependency/Risk | Type | Impact | Mitigation |
 |-----------------|------|--------|------------|
-| API from team X not ready | Dependency | Blocks integration | Stub the API; align on delivery date |
-| Users may not adopt new flow | Risk | Low adoption | Run A/B test before full rollout |
-| Regulatory approval needed | Dependency | Blocks launch | Start review process in parallel |
+| API from team X not ready | Dependency | Blocks integration | Stub the API; align on date |
+| Users may not adopt new flow | Risk | Low adoption | A/B test before full rollout |
 
-**Guidance:**
+Identify dependencies on other teams early — they are the #1 cause of PRD delays.
 
-- Dependencies on other teams are the #1 cause of PRD delays. Identify them early and get commitments.
-- For each risk, define: what is the trigger, what is the impact, and what is the mitigation plan.
-
----
-
-### 7. Timeline and Milestones
+### 8. Timeline and Milestones
 
 | Milestone | Date | Description |
 |-----------|------|-------------|
 | Design review | Week 2 | Finalize UX flows |
 | Engineering kick-off | Week 3 | Begin implementation |
-| Internal dogfood | Week 6 | Team tests end-to-end |
-| Beta launch | Week 8 | 10% of users |
-| GA launch | Week 10 | Full rollout |
+| Beta launch | Week 6 | 10% of users |
+| GA launch | Week 8 | Full rollout + metric review |
 
-**Guidance:**
+Include a **decision checkpoint** before full launch to review beta metrics against success criteria.
 
-- A PRD timeline is directional, not a commitment. It exists to pressure-test feasibility.
-- If working backward from the timeline reveals the plan is infeasible, surface this early. Either cut scope or extend timeline — do not hide the gap.
-- Include a "decision checkpoint" before full launch where you review beta metrics against success criteria.
-
----
-
-### 8. Open Questions
-
-List unresolved questions that need answers before or during development:
+### 9. Open Questions
 
 - [ ] Question 1 — Owner: [name], Due: [date]
 - [ ] Question 2 — Owner: [name], Due: [date]
@@ -212,52 +179,7 @@ A PRD with no open questions is either trivial or the author has not thought dee
 
 ---
 
-## Anti-Patterns to Avoid
-
-| Anti-Pattern | Why It Fails | Fix |
-|-------------|--------------|-----|
-| **PRD as feature list** | No problem framing, no success criteria, no strategy connection | Start with Problem Statement and Goals before any features |
-| **PRD nobody reads** | Too long, too detailed too early, written for the author not the audience | Match format to decision size; use the One-Pager for early alignment |
-| **Solution masquerading as problem** | "We need to build X" skips the "why" | Rewrite: what customer pain does X solve? Is X the only solution? |
-| **Vanity metrics** | "Increase page views" doesn't connect to business value | Use outcome metrics tied to retention, revenue, or activation |
-| **Missing Non-Goals** | Scope creeps because boundaries were never set | Add explicit Non-Goals section; review it with stakeholders |
-| **No decision checkpoint** | Feature ships, nobody checks if it worked | Add a milestone for metric review 30-60 days post-launch |
-| **Strategy-disconnected PRD** | Feature exists in isolation from company goals | Add a line in Problem Statement: "This supports [strategic pillar]" |
-
----
-
-## Conversation Flow for the Agent
-
-When helping a user write a PRD, follow this sequence:
-
-### Phase 1: Understand Context
-1. "What problem are you trying to solve and for whom?"
-2. "What evidence do you have that this is a real problem? (data, customer quotes, support tickets)"
-3. "How does this connect to your team's or company's current strategy?"
-4. "What level of detail do you need — a one-pager, standard PRD, or comprehensive PRD?"
-
-### Phase 2: Define Success
-5. "What do you hope will happen when you ship this? What metrics will change?"
-6. "What's the guardrail — what should NOT get worse?"
-
-### Phase 3: Explore Solution Space
-7. "What approaches have you considered? Why this one?"
-8. "What are you explicitly NOT building in v1?"
-
-### Phase 4: Identify Risks
-9. "What dependencies do you have on other teams?"
-10. "What's the biggest risk to this project?"
-
-### Phase 5: Draft and Review
-11. Generate the PRD using the template above.
-12. Highlight any sections that are thin or based on assumptions rather than evidence.
-13. Suggest specific next steps: "Validate assumption X with user research before finalizing."
-
-Ask ONE question at a time. Do not overwhelm with multiple questions.
-
----
-
-## One-Pager Template (Quick Version)
+## One-Pager Template
 
 For early-stage alignment, use this abbreviated format:
 
@@ -281,11 +203,257 @@ For early-stage alignment, use this abbreviated format:
 
 ---
 
+## Conversation Flow
+
+When helping a user write a PRD and optionally decompose it into tasks, follow this sequence. Ask ONE question at a time — do not overwhelm.
+
+### Phase 1: Understand Context
+
+1. "What problem are you trying to solve and for whom?"
+2. "What evidence do you have that this is a real problem? (data, customer quotes, support tickets)"
+3. "How does this connect to your team's or company's current strategy?"
+4. "Is this a new feature, bug fix, refactoring, or documentation?"
+5. "What level of detail do you need — a one-pager, standard PRD, or comprehensive PRD?"
+
+### Phase 2: Define Success
+
+6. "What do you hope will happen when you ship this? What metrics will change?"
+7. "What's the guardrail — what should NOT get worse?"
+8. "Do you have any deadline, budget, or technology constraints?"
+
+### Phase 3: Explore Solution Space
+
+9. "What approaches have you considered? Why this one?"
+10. "What are you explicitly NOT building in v1?"
+
+### Phase 4: Identify Risks
+
+11. "What dependencies do you have on other teams?"
+12. "What's the biggest risk to this project?"
+
+### Phase 5: Draft and Review
+
+13. Generate the PRD using the appropriate template.
+14. Highlight sections that are thin or based on assumptions rather than evidence.
+15. Suggest specific next steps: "Validate assumption X with user research before finalizing."
+
+### Phase 6: Task Decomposition (Optional)
+
+After completing the PRD, offer: "Want me to decompose this into executable technical tasks with estimates?"
+
+If yes, transition to the Task Decomposition Mode below. Maintain context — use the same terms, reference requirements by number, respect constraints.
+
+---
+
+## Anti-Patterns
+
+| Anti-Pattern | Why It Fails | Fix |
+|-------------|--------------|-----|
+| **PRD as feature list** | No problem framing, no success criteria | Start with Problem Statement and Goals before features |
+| **PRD nobody reads** | Too long, too detailed too early | Match format to decision size; use One-Pager first |
+| **Solution masquerading as problem** | "We need to build X" skips the "why" | Rewrite: what customer pain does X solve? |
+| **Vanity metrics** | "Increase page views" has no business value | Use outcome metrics tied to retention, revenue, or activation |
+| **Missing Non-Goals** | Scope creeps because boundaries were never set | Add explicit Non-Goals; review with stakeholders |
+| **No decision checkpoint** | Feature ships, nobody checks if it worked | Add milestone for metric review 30-60 days post-launch |
+| **Strategy-disconnected PRD** | Feature exists in isolation from company goals | Add "This supports [strategic pillar]" in Problem Statement |
+| **Vague requirements** | "System should be fast" is untestable | Demand specifics: "Response time < 300ms at p95" |
+| **Tasks > 8 points** | Too large to estimate or execute reliably | Always break down; see decomposition patterns |
+
+---
+
+## Task Decomposition Mode
+
+Activated after a PRD is complete, or when user requests task breakdown directly (`/tasks`, "generate tasks", "break into tasks").
+
+### Activation Questions
+
+1. "Tasks for ALL requirements or specific ones?"
+2. "Need complexity estimates?"
+3. "Want execution order suggestion?"
+4. "Team works in sprints? How many days?"
+
+### Analysis Before Generation
+
+Before generating tasks, analyze:
+- **Type** of each requirement (Backend / Frontend / Database / DevOps / Docs / Tests)
+- **Dependencies** between requirements
+- **Complexity** and uncertainties
+- **Natural phases** (Setup → Core → Tests → Deploy)
+
+### Task Format
+
+```markdown
+## Requirement: [copy from PRD]
+
+### Task 1: [Clear and Actionable Name]
+**Complexity**: [1, 3, 5, or 8 points]
+**Type**: [Backend/Frontend/Infra/Docs/Tests]
+**Dependencies**: [list or "None"]
+
+**Objective**: [1 sentence of what this delivers]
+
+**Details**:
+1. [Specific technical step]
+2. [Specific technical step]
+
+**Files/Components Involved**:
+path/file.ext → [What to do]
+
+**Acceptance Criteria**:
+- [ ] [How to validate it works]
+- [ ] [Edge cases verified]
+
+**Required Tests**:
+- [ ] [Specific unit test]
+- [ ] [Integration/E2E test]
+```
+
+### Execution Plan Format
+
+```markdown
+# Execution Plan: [PRD Title]
+
+## Summary
+- **Total tasks**: [N] | **Estimate**: [X points] (~[Y days])
+
+## Phase 1: Foundation
+**Objective**: [phase goal] | **Duration**: [X pts]
+1. **[Task]** - [X pts] - [Type] → [brief description]
+
+## Phase 2: Core Implementation
+[Same structure]
+
+## Phase 3: Testing & Integration
+[Same structure]
+
+## Phase 4: Deploy & Validation
+[Same structure]
+
+## Identified Risks
+| Risk | Impact | Mitigation | Task |
+|------|--------|------------|------|
+| [Risk] | High/Med/Low | [How to mitigate] | [#X] |
+
+## Recommendations
+- **Order**: [specific recommendation]
+- **Parallelization**: [which tasks can run in parallel]
+- **First sprint focus**: [task list]
+```
+
+---
+
+## Scoring System
+
+### Point Scale
+
+| Points | Time | Characteristics | Examples |
+|--------|------|-----------------|----------|
+| **1** | < 2h | Isolated change, 1 file, no complex logic | Add form field, adjust CSS |
+| **3** | 2-4h | Simple business logic, 2-3 files, known pattern | Basic CRUD, simple endpoint |
+| **5** | 4-8h | Non-trivial logic, multiple components | External API integration |
+| **8** | 8-16h | High complexity, interconnected parts | Complex system integration |
+| **13+** | > 16h | **TOO LARGE** — must break down further | |
+
+### Estimation Rules
+
+- Estimate for ONE developer
+- Include implementation + basic tests + expected debug time
+- If in doubt, choose the LARGER number
+- If > 8 points, ALWAYS break into smaller tasks
+
+### Time Conversion
+
+```
+1 pt  = 1-2 hours
+3 pts = 2-4 hours
+5 pts ≈ 1 day
+8 pts ≈ 1-2 days
+```
+
+---
+
+## Common Decomposition Patterns
+
+### Frontend + Backend Feature
+```
+1. Backend: API/Endpoints (5pts)
+2. Frontend: UI Components (5pts)
+3. Integration and Tests (3pts)
+```
+
+### External Integration
+```
+1. Research/Setup (3pts)
+2. Core Implementation (5-8pts)
+3. Resilience (retries, circuit breaker) (3-5pts)
+4. Tests (3pts)
+```
+
+### Migration / Refactoring
+```
+1. Analysis (3pts)
+2. Parallel Setup (5pts)
+3. Incremental Migration — multiple tasks (5pts each)
+4. Validation and Switch (5pts)
+5. Cleanup (3pts)
+```
+
+### Performance Optimization
+```
+1. Profiling (3pts)
+2. Quick Wins (3pts each)
+3. Structural Optimizations (5-8pts each)
+4. Final Validation (3pts)
+```
+
+---
+
+## Risk Identification
+
+| Level | Indicators |
+|-------|------------|
+| **HIGH** | External API dependency, new tech, downtime risk, data migration, critical performance |
+| **MEDIUM** | Multiple integrations, unclear logic, tight deadline |
+| **LOW** | Isolated task, easily revertible |
+
+For each risk, define: trigger, impact, and mitigation plan.
+
+---
+
+## Quality Checklists
+
+### PRD Checklist
+
+- [ ] Problem statement is evidence-based, not assumption-based
+- [ ] Goals have metrics with baselines, targets, and timeframes
+- [ ] Guardrail metric defined (what should NOT get worse)
+- [ ] User stories grounded in real behavior, prioritized (P0/P1/P2)
+- [ ] Non-Goals section is specific and reviewed with stakeholders
+- [ ] Dependencies identified with owners and dates
+- [ ] Decision checkpoint milestone included
+- [ ] Open questions have owners and due dates
+- [ ] No contradictions between constraints and requirements
+- [ ] Reader can trace a line from company strategy → problem → solution → metrics
+
+### Task Decomposition Checklist
+
+- [ ] All PRD requirements covered by tasks
+- [ ] No task exceeds 8 points
+- [ ] Dependencies between tasks identified
+- [ ] All tasks have complexity estimates
+- [ ] Test tasks included for each requirement
+- [ ] Risks identified with mitigation plans
+- [ ] Phases organized logically (Foundation → Core → Tests → Deploy)
+- [ ] Parallelizable tasks identified
+- [ ] First sprint scope is realistic
+
+---
+
 ## Sources
 
 Frameworks synthesized from:
 
-- **Jackie Bavaro** (ex-Asana Head of Product, co-author of *Cracking the PM Career*) — Strategy as connecting dots from business goals to features; the three components of strategy (vision, strategic framework, roadmap); collaborative strategy development. [Lenny's Podcast]
-- **Melissa Perri** (author of *Escaping the Build Trap*, CEO of Product Institute) — Outcome-driven product management; the danger of being an order-taker; "What do we hope will happen when we release this?"; discovery vs delivery balance. [Lenny's Podcast]
-- **Ken Norton** (ex-Google PM lead, executive coach) — The art vs science of PM; 10X vs 10% thinking; creative vs reactive leadership; evaluating how features come to be. [Lenny's Podcast]
-- **Melissa Perri & Denise Tilles** (*Product Operations*) — Strategy deployment; connecting value back to teams; process standardization for product management at scale. [Lenny's Podcast]
+- **Jackie Bavaro** (ex-Asana Head of Product, *Cracking the PM Career*) — Strategy as connecting dots; Non-Goals as scope protection. [Lenny's Podcast]
+- **Melissa Perri** (*Escaping the Build Trap*, CEO of Product Institute) — Outcome-driven PM; "What do we hope will happen when we release this?"; discovery vs delivery. [Lenny's Podcast]
+- **Ken Norton** (ex-Google PM lead) — Write for alignment not completeness; 10X vs 10% thinking. [Lenny's Podcast]
+- **Melissa Perri & Denise Tilles** (*Product Operations*) — Strategy deployment; process standardization at scale. [Lenny's Podcast]

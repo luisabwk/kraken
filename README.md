@@ -53,50 +53,17 @@ LLMs are probabilistic. Your business logic shouldn't be.
 
 ```
 kraken/
-├── .cursor/
-│   ├── commands/           # Custom slash commands
-│   │   ├── boot.md         # /boot - Initialize agent
-│   │   ├── clean.md        # /clean - Repository hygiene
-│   │   ├── code-review.md  # /code-review - Quality checklist
-│   │   ├── commit.md       # /commit - Proper git commits
-│   │   ├── context.md      # /context - Dynamic context management
-│   │   ├── execute.md      # /execute - Run tasks
-│   │   ├── mcp.md          # /mcp - Manage MCP modes
-│   │   ├── prp-new.md      # /prp-new - Create PRPs
-│   │   ├── prp-review.md   # /prp-review - Review PRPs
-│   │   └── run.md          # /run - Execute scripts
-│   ├── hooks/              # Behavioral guardrails (10 hooks)
-│   │   ├── block-dangerous-commands.md
-│   │   ├── warn-debug-code.md
-│   │   ├── warn-hardcoded-secrets.md
-│   │   ├── warn-long-output.md
-│   │   └── ... (10 hooks total)
-│   ├── rules/              # Operating rules
-│   │   ├── plan/           # How to create plans
-│   │   ├── task/           # Task management
-│   │   ├── execution/      # How to execute
-│   │   ├── prd/            # PRP creation guide
-│   │   ├── stack/          # Tech preferences
-│   │   ├── mcp-modes/      # MCP optimization
-│   │   ├── dynamic-context/  # Context window management
-│   │   ├── code-simplifier/
-│   │   ├── systematic-debugging/
-│   │   ├── test-driven-development/
-│   │   └── documentation-standards/
-│   └── skills/             # Detailed procedural skills
-│       ├── code-simplifier/
-│       ├── documentation-standards/
-│       ├── dynamic-context/
-│       ├── execution/
-│       ├── memory-awareness/
-│       ├── mcp-modes/
-│       ├── plan/
-│       ├── prd/
-│       ├── skill-creator/    # Meta-skill: create new skills
-│       ├── stack/
-│       ├── systematic-debugging/
-│       ├── task/
-│       └── test-driven-development/
+├── .cursor/                # Cursor IDE configuration
+│   ├── commands/           # Custom slash commands (10)
+│   ├── hooks/              # Behavioral guardrails (10)
+│   ├── rules/              # Operating rules (11)
+│   └── skills/             # Detailed procedural skills (13)
+├── .claude/                # Claude Code configuration
+│   ├── commands/           # Slash commands (10)
+│   ├── agents/             # Subagent definitions (5)
+│   └── settings.json       # Permissions and hooks
+├── CLAUDE.md               # Claude Code root instructions
+├── AGENTS.md               # Cursor root instructions
 ├── context/                # Dynamic context storage
 │   ├── mcp/                # Long MCP responses
 │   ├── history/            # Session persistence
@@ -119,7 +86,7 @@ kraken/
 
 ### Prerequisites
 
-- [Cursor IDE](https://cursor.sh) with MCP support
+- [Cursor IDE](https://cursor.sh) and/or [Claude Code](https://docs.anthropic.com/en/docs/claude-code) CLI
 - Node.js >= 18.x LTS
 - Python >= 3.10
 - Git
@@ -292,7 +259,37 @@ python3 .cursor/skills/skill-creator/scripts/init_skill.py my-skill --path .curs
 | [vaults/AGENTS.md](./vaults/AGENTS.md) | Vault structure & MCP modes |
 | [context/README.md](./context/README.md) | Dynamic context system |
 | [.cursor/hooks/README.md](./.cursor/hooks/README.md) | Hook documentation |
-| [.cursor/skills/](./.cursor/skills/) | Skill library |
+| [.cursor/skills/](./.cursor/skills/) | Skill library (Cursor) |
+| [CLAUDE.md](./CLAUDE.md) | Claude Code root instructions |
+| [.claude/agents/](./.claude/agents/) | Subagent library (Claude Code) |
+
+---
+
+## 🔄 Dual Compatibility: Cursor + Claude Code
+
+Kraken supports **both Cursor IDE and Claude Code** out of the box:
+
+| Feature | Cursor | Claude Code |
+|---------|--------|-------------|
+| Root instructions | `AGENTS.md` | `CLAUDE.md` |
+| Vault instructions | `vaults/AGENTS.md` | `vaults/CLAUDE.md` |
+| Slash commands | `.cursor/commands/` | `.claude/commands/` |
+| Behavioral hooks | `.cursor/hooks/` (markdown) | `.claude/settings.json` (shell) |
+| Rules/Skills | `.cursor/rules/` + `.cursor/skills/` | Consolidated in `CLAUDE.md` |
+| Subagents | `.cursor/skills/` (on-demand) | `.claude/agents/` (persistent) |
+| Permissions | Via IDE settings | `.claude/settings.json` |
+
+Both configurations share the same project structure (`vaults/`, `context/`), plans, tasks, and execution scripts. Switch between tools seamlessly.
+
+### Claude Code Subagents
+
+| Agent | Purpose |
+|-------|---------|
+| `code-reviewer` | Confidence-based code review |
+| `debugger` | Systematic root cause analysis |
+| `prd-creator` | PRP creation and task decomposition |
+| `code-simplifier` | Post-implementation code cleanup |
+| `tdd-coach` | Test-driven development guidance |
 
 ---
 

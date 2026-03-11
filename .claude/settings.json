@@ -1,0 +1,77 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm run *)",
+      "Bash(npm test *)",
+      "Bash(npm install *)",
+      "Bash(npx *)",
+      "Bash(git status)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git branch *)",
+      "Bash(git checkout *)",
+      "Bash(git pull *)",
+      "Bash(git stash *)",
+      "Bash(ls *)",
+      "Bash(find *)",
+      "Bash(grep *)",
+      "Bash(rg *)",
+      "Bash(head *)",
+      "Bash(tail *)",
+      "Bash(wc *)",
+      "Bash(du *)",
+      "Bash(cat *)",
+      "Bash(mkdir *)",
+      "Bash(touch *)",
+      "Bash(cp *)",
+      "Bash(mv *)",
+      "Bash(python3 *)",
+      "Bash(pip install *)",
+      "Bash(pip freeze *)",
+      "Bash(ruff *)",
+      "Bash(echo *)",
+      "Read",
+      "Edit",
+      "Write",
+      "Grep"
+    ],
+    "deny": [
+      "Bash(rm -rf /)",
+      "Bash(rm -rf ~)",
+      "Bash(rm -rf /*)",
+      "Bash(dd if=*)",
+      "Bash(mkfs.*)",
+      "Bash(chmod 777 *)",
+      "Bash(chown -R * /)",
+      "Bash(> /dev/*)",
+      "Bash(git push --force *)",
+      "Bash(git push -f *)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "FILE=\"$CLAUDE_TOOL_INPUT_FILE_PATH\"; if [ -n \"$FILE\" ]; then LINES=$(wc -l < \"$FILE\" 2>/dev/null || echo 0); if [ \"$LINES\" -gt 500 ]; then echo \"WARNING: File $FILE has $LINES lines (>500). Consider splitting.\"; fi; fi"
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "CMD=\"$CLAUDE_TOOL_INPUT_COMMAND\"; if echo \"$CMD\" | grep -qE '(rm\\s+-rf\\s+[/~]|dd\\s+if=|mkfs\\.|>\\s*/dev/|chmod\\s+777)'; then echo 'BLOCKED: Dangerous command detected' >&2; exit 2; fi"
+          }
+        ]
+      }
+    ]
+  }
+}

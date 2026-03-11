@@ -1,315 +1,357 @@
 # 🦑 Kraken
 
-> **Release the Kraken!** — Unleash reliable AI agents with a battle-tested 3-layer architecture.
+> **Release the Kraken!** — Um framework para transformar agentes de IA em parceiros confiáveis de trabalho.
 
-Stop letting your AI agent run wild. Kraken brings order to chaos with a proven framework that separates what to do, how to decide, and how to execute.
+Pare de torcer para o ChatGPT não inventar coisas. O Kraken é um framework open-source que organiza como você trabalha com agentes de IA — separando **o que fazer**, **como decidir** e **como executar**.
 
----
-
-## Why Kraken?
-
-LLMs are probabilistic. Your business logic shouldn't be.
-
-```
-90% accuracy per step = 59% success over 5 steps
-80% accuracy per step = 33% success over 5 steps
-```
-
-**The solution?** Push complexity into deterministic code. Let the AI focus on decisions, not execution.
+Feito para **Product Managers, Product Owners, Product Designers, AI Builders** e qualquer pessoa que use IA como ferramenta de trabalho no dia a dia.
 
 ---
 
-## 🏗️ The 3-Layer Architecture
+## Por que o Kraken existe?
+
+LLMs são probabilísticos. Sua lógica de negócio não deveria ser.
+
+```
+90% de acerto por passo = 59% de sucesso em 5 passos
+80% de acerto por passo = 33% de sucesso em 5 passos
+```
+
+Quanto mais passos você pede para a IA executar sozinha, mais ela erra. A solução? **Separar as responsabilidades**: a IA decide, scripts determinísticos executam.
+
+### Para quem é isso?
+
+| Perfil | Como o Kraken te ajuda |
+|--------|----------------------|
+| **Product Manager** | Crie PRDs estruturados, decomponha em tasks, acompanhe execução |
+| **Product Owner** | Planeje sprints com estimativas de complexidade, priorize com clareza |
+| **Product Designer** | Documente decisões de design, mantenha specs organizados |
+| **AI Builder** | Monte agentes confiáveis com guardrails, memória e self-healing |
+| **Dev com IA** | TDD assistido, code review com scoring, debugging sistemático |
+
+---
+
+## Como funciona: a Arquitetura de 3 Camadas
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│  LAYER 1: DIRECTIVE (What to do)                            │
-│  Location: /vaults/<area>/projects/<project>/plans/          │
-│  Content: SOPs in Markdown - goals, inputs, tools, outputs  │
+│  CAMADA 1: DIRETIVA (O que fazer)                           │
+│  Onde: /vaults/<area>/projects/<projeto>/plans/              │
+│  O quê: Instruções em Markdown — objetivos, inputs, outputs │
 └─────────────────────────────────────────────────────────────┘
                               ↓
 ┌─────────────────────────────────────────────────────────────┐
-│  LAYER 2: ORCHESTRATION (Decision making)                   │
-│  Actor: AI Agent                                            │
-│  Role: Read directives, call tools, handle errors, learn    │
+│  CAMADA 2: ORQUESTRAÇÃO (Quem decide)                       │
+│  Quem: O Agente de IA                                       │
+│  O quê: Lê instruções, chama ferramentas, lida com erros    │
 └─────────────────────────────────────────────────────────────┘
                               ↓
 ┌─────────────────────────────────────────────────────────────┐
-│  LAYER 3: EXECUTION (Doing the work)                        │
-│  Location: /vaults/<area>/projects/<project>/execution/      │
-│  Content: Deterministic scripts (Python, TypeScript, JS)    │
+│  CAMADA 3: EXECUÇÃO (Quem faz o trabalho)                   │
+│  Onde: /vaults/<area>/projects/<projeto>/execution/          │
+│  O quê: Scripts determinísticos (Python, TypeScript, JS)    │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-| Layer | What it does | Who owns it |
-|-------|--------------|-------------|
-| **Directive** | Defines goals and instructions | You (in Markdown) |
-| **Orchestration** | Makes decisions, routes work | AI Agent |
-| **Execution** | Runs deterministic code | Scripts you control |
+| Camada | Faz o quê | Quem controla |
+|--------|-----------|---------------|
+| **Diretiva** | Define metas e instruções | Você (em Markdown) |
+| **Orquestração** | Toma decisões, roteia trabalho | Agente de IA |
+| **Execução** | Roda código determinístico | Scripts que você controla |
+
+**Na prática**: Você escreve um plano em Markdown. O agente lê, decide o que fazer, chama o script certo, lida com erros, e atualiza o plano com o que aprendeu.
 
 ---
 
-## 📁 Project Structure
+## Início Rápido
 
-```
-kraken/
-├── .cursor/                # Cursor IDE configuration
-│   ├── commands/           # Custom slash commands (10)
-│   ├── hooks/              # Behavioral guardrails (10)
-│   ├── rules/              # Operating rules (11)
-│   └── skills/             # Detailed procedural skills (13)
-├── .claude/                # Claude Code configuration
-│   ├── commands/           # Slash commands (10)
-│   ├── agents/             # Subagent definitions (5)
-│   └── settings.json       # Permissions and hooks
-├── CLAUDE.md               # Claude Code root instructions
-├── AGENTS.md               # Cursor root instructions
-├── context/                # Dynamic context storage
-│   ├── mcp/                # Long MCP responses
-│   ├── history/            # Session persistence
-│   └── terminal/           # Execution logs
-├── vaults/                 # Your workspaces
-│   ├── AGENTS.md           # Vault-level instructions
-│   ├── work/
-│   │   ├── projects/       # Full initiatives
-│   │   ├── data/           # Data pipelines and reports
-│   │   └── apps/           # Deployable services
-│   └── personal/projects/  # Personal projects
-├── .gitignore
-├── AGENTS.md               # Root agent instructions
-└── README.md
-```
+### Pré-requisitos
 
----
-
-## 🚀 Quick Start
-
-### Prerequisites
-
-- [Cursor IDE](https://cursor.sh) and/or [Claude Code](https://docs.anthropic.com/en/docs/claude-code) CLI
+- [Cursor IDE](https://cursor.sh) e/ou [Claude Code](https://docs.anthropic.com/en/docs/claude-code) (CLI)
 - Node.js >= 18.x LTS
 - Python >= 3.10
 - Git
 
-### Setup
-
-1. **Clone the repo**
-   ```bash
-   git clone https://github.com/luisabwk/kraken.git
-   cd kraken
-   ```
-
-2. **Configure your environment**
-   ```bash
-   cp .env.example .env  # If needed
-   # Add your API keys
-   ```
-
-3. **Release the Kraken!**
-   ```
-   /boot
-   ```
-
----
-
-## 🎮 Commands
-
-| Command | What it does |
-|---------|--------------|
-| `/boot` | Initialize agent, verify setup |
-| `/execute` | Run task execution workflow |
-| `/code-review` | Quality assurance checklist |
-| `/commit` | Git commit with proper format |
-| `/prp-new` | Create Product Requirement Prompt |
-| `/prp-review` | Review existing PRP |
-| `/mcp` | Switch MCP modes (minimal/dev/full) |
-| `/run` | Execute specific scripts |
-| `/context` | Manage dynamic context (status/clean/log) |
-| `/clean` | Repository hygiene and maintenance |
-
----
-
-## 🛡️ Hooks (Guardrails)
-
-Kraken includes behavioral hooks that prevent common mistakes:
-
-| Hook | What it catches |
-|------|-----------------|
-| `block-dangerous-commands` | `rm -rf`, `DROP TABLE`, etc. |
-| `warn-debug-code` | `console.log`, `debugger`, `print()` |
-| `warn-hardcoded-secrets` | API keys, passwords in code |
-| `warn-large-files` | Files > 500 lines |
-| `warn-any-type` | TypeScript `any` usage |
-| `require-tests` | Missing test files |
-| `warn-env-commit` | `.env` files being committed |
-| `warn-todo-comments` | Unresolved TODOs |
-| `warn-long-output` | Command output > 50 lines (context bloat) |
-
----
-
-## 🧠 Self-Annealing
-
-Kraken gets smarter over time:
-
-```
-Error occurs
-    ↓
-Fix the issue
-    ↓
-Update the tool
-    ↓
-Test the tool
-    ↓
-Update directive
-    ↓
-System is now stronger
-```
-
-When something breaks, the agent learns and updates the directives so it doesn't happen again.
-
----
-
-## 📦 Dynamic Context Management
-
-LLM context windows fill up fast. Kraken includes a built-in system to manage this:
-
-- **Long outputs** (>50 lines) are saved to `context/` instead of cluttering chat
-- **Session history** persists decisions across auto-compaction
-- **Terminal logs** are redirected for selective retrieval
-
-```
-/context status   → See usage
-/context clean    → Remove old files
-/context log      → Record a decision
-```
-
-See `.cursor/rules/dynamic-context/RULE.md` for the full system.
-
----
-
-## 📋 Creating a New Project
+### Instalação
 
 ```bash
-# Create project structure
-mkdir -p vaults/work/projects/my-project/{plans,tasks,execution,project}
+# 1. Clone o repositório
+git clone https://github.com/luisabwk/kraken.git
+cd kraken
 
-# Add project-specific AGENTS.md
-touch vaults/work/projects/my-project/AGENTS.md
+# 2. Configure o ambiente (se necessário)
+cp .env.example .env
+# Adicione suas API keys
+
+# 3. Solte o Kraken!
+# No Cursor ou Claude Code, digite:
+/boot
 ```
 
-Then create your first plan in `plans/` and let the Kraken take it from there.
-
-### Vault Categories
-
-| Category | Path | Use for |
-|----------|------|---------|
-| **projects/** | `vaults/<area>/projects/` | Full initiatives with plans, tasks, execution |
-| **data/** | `vaults/<area>/data/` | Data pipelines, reports, datasets |
-| **apps/** | `vaults/<area>/apps/` | Deployable apps and services |
+O comando `/boot` verifica se a estrutura está correta, carrega as regras e te mostra o que está disponível.
 
 ---
 
-## 🧩 Skills
+## Tutorial: Seu Primeiro Projeto
 
-Skills are detailed procedural guides that extend the agent's capabilities. While rules provide short, always-on guardrails, skills provide in-depth workflows loaded on-demand.
+### Passo 1: Crie a estrutura do projeto
 
-| Skill | What it does |
-|-------|--------------|
-| `code-simplifier` | Simplify and refine code after implementation |
-| `documentation-standards` | Ensure consistent structural docs |
-| `dynamic-context` | Manage context window efficiently |
-| `execution` | Step-by-step task execution workflow |
-| `memory-awareness` | Proactive memory usage across sessions |
-| `mcp-modes` | Optimize which MCPs to use |
-| `plan` | Create structured project plans |
-| `prd` | Create PRPs and break into tasks |
-| `skill-creator` | Create new skills (meta-skill) |
-| `stack` | Technology choices and setup |
-| `systematic-debugging` | Find root cause before fixing |
-| `task` | Create and manage task files |
-| `test-driven-development` | Red → Green → Refactor cycle |
-
-### Creating New Skills
-
-Use the `skill-creator` skill to create your own:
 ```bash
-python3 .cursor/skills/skill-creator/scripts/init_skill.py my-skill --path .cursor/skills/
+mkdir -p vaults/work/projects/meu-projeto/{plans,tasks,execution,project}
+touch vaults/work/projects/meu-projeto/AGENTS.md
+```
+
+Isso cria:
+- `plans/` — Seus planos e PRDs
+- `tasks/` — Tasks individuais detalhadas
+- `execution/` — Scripts que o agente vai rodar
+- `project/` — Código, assets e outputs do projeto
+
+### Passo 2: Crie um PRP (Product Requirement Prompt)
+
+Digite `/prp-new` no chat. O agente vai te guiar com perguntas estruturadas:
+
+1. "Qual problema você quer resolver?"
+2. "É feature nova, bug fix, refatoração ou documentação?"
+3. "O que já existe hoje?"
+4. "Tem restrições de prazo, orçamento ou tecnologia?"
+5. "Como você vai saber que está pronto?"
+
+No final, ele gera um PRP completo com: Contexto, Requisitos, Restrições, Critérios de Sucesso e Não-Requisitos.
+
+### Passo 3: Decomponha em Tasks
+
+Após aprovar o PRP, o agente decompõe em tasks executáveis com:
+- Estimativa de complexidade (1, 3, 5 ou 8 pontos)
+- Dependências entre tasks
+- Critérios de aceitação
+- Organização em fases (Fundação → Core → Testes → Deploy)
+
+### Passo 4: Execute
+
+Digite `/execute` e o agente:
+1. Lê o plano e as tasks
+2. Atualiza o status ("In process")
+3. Executa cada passo
+4. Roda testes e validações
+5. Marca como "Done" e documenta aprendizados
+
+### Passo 5: Revise
+
+Digite `/code-review` para uma revisão de qualidade com scoring de confiança — só reporta problemas reais (confiança >= 80%), sem ruído.
+
+---
+
+## Comandos Disponíveis
+
+Todos os comandos funcionam tanto no Cursor (`/comando`) quanto no Claude Code (`/comando`).
+
+| Comando | O que faz |
+|---------|-----------|
+| `/boot` | Inicializa o agente e verifica o setup |
+| `/execute` | Executa tasks de um plano passo a passo |
+| `/code-review` | Revisão de qualidade com scoring de confiança |
+| `/commit` | Commit no git com Conventional Commits |
+| `/prp-new` | Cria um PRP (Product Requirement Prompt) do zero |
+| `/prp-review` | Revisa e pontua um PRP existente |
+| `/mcp` | Alterna modos de MCP (minimal/dev/infra/pm/full) |
+| `/run <projeto>` | Roda um projeto localmente |
+| `/context` | Gerencia contexto dinâmico (status/clean/log) |
+| `/clean` | Manutenção e higiene do repositório |
+
+---
+
+## Guardrails: Proteções Automáticas
+
+O Kraken vem com hooks que protegem você de erros comuns:
+
+| Proteção | O que detecta |
+|----------|--------------|
+| **Bloqueio de comandos perigosos** | `rm -rf /`, `DROP TABLE`, formatação de disco |
+| **Código de debug** | `console.log`, `debugger`, `print()` esquecidos |
+| **Secrets no código** | API keys, passwords hardcoded |
+| **Arquivos grandes** | Arquivos com mais de 500 linhas |
+| **TypeScript `any`** | Uso de `any` que desativa type safety |
+| **Testes obrigatórios** | Lembrete de rodar testes antes de concluir |
+| **`.env` no commit** | Bloqueia commit de arquivos com secrets |
+| **TODOs perdidos** | Detecta TODO/FIXME sem tracking |
+| **Output longo** | Saída > 50 linhas que polui o contexto |
+
+---
+
+## Estrutura do Repositório
+
+```
+kraken/
+├── .cursor/                # Configuração para Cursor IDE
+│   ├── commands/           # 10 slash commands
+│   ├── hooks/              # 10 guardrails comportamentais
+│   ├── rules/              # 11 regras operacionais
+│   └── skills/             # 13 skills procedurais
+├── .claude/                # Configuração para Claude Code
+│   ├── commands/           # 10 slash commands
+│   ├── agents/             # 5 subagentes especializados
+│   └── settings.json       # Permissões e hooks
+├── CLAUDE.md               # Instruções root (Claude Code)
+├── AGENTS.md               # Instruções root (Cursor)
+├── context/                # Armazenamento de contexto dinâmico
+│   ├── mcp/                # Respostas longas de ferramentas
+│   ├── history/            # Histórico de decisões da sessão
+│   └── terminal/           # Logs de execução
+├── vaults/                 # Seus workspaces
+│   ├── work/
+│   │   ├── projects/       # Iniciativas completas
+│   │   ├── data/           # Pipelines de dados e relatórios
+│   │   └── apps/           # Apps e serviços deployáveis
+│   └── personal/projects/  # Projetos pessoais
+└── .gitignore
+```
+
+### Categorias de Vaults
+
+| Categoria | Caminho | Use para |
+|-----------|---------|----------|
+| **projects/** | `vaults/<area>/projects/` | Iniciativas completas com planos, tasks e execução |
+| **data/** | `vaults/<area>/data/` | Pipelines de dados, relatórios, datasets |
+| **apps/** | `vaults/<area>/apps/` | Apps deployáveis e serviços |
+
+---
+
+## Skills: Conhecimento Especializado
+
+Skills são guias procedurais detalhados que o agente carrega sob demanda. Enquanto as regras são curtas e sempre ativas, skills trazem workflows completos.
+
+| Skill | O que faz |
+|-------|-----------|
+| `code-simplifier` | Simplifica código após implementação, sem mudar comportamento |
+| `documentation-standards` | Garante consistência em docs estruturais |
+| `dynamic-context` | Gerencia janela de contexto de forma eficiente |
+| `execution` | Workflow passo a passo para executar tasks |
+| `memory-awareness` | Uso proativo de memória entre sessões |
+| `mcp-modes` | Otimiza quais MCPs usar por contexto |
+| `plan` | Cria planos de projeto estruturados |
+| `prd` | Cria PRPs e decompõe em tasks técnicas |
+| `skill-creator` | Meta-skill: cria novos skills |
+| `stack` | Escolhas de tecnologia e setup de projetos |
+| `systematic-debugging` | Encontra causa raiz antes de corrigir |
+| `task` | Cria e gerencia arquivos de task |
+| `test-driven-development` | Ciclo Red → Green → Refactor |
+
+### Criando Novos Skills
+
+```bash
+python3 .cursor/skills/skill-creator/scripts/init_skill.py meu-skill --path .cursor/skills/
 ```
 
 ---
 
-## 🎯 Operating Principles
+## Gerenciamento de Contexto Dinâmico
 
-1. **Check for tools first** — Reuse before creating
-2. **Self-anneal** — Learn from errors, update directives
-3. **KISS** — Keep It Simple, Stupid
-4. **YAGNI** — You Ain't Gonna Need It
-5. **DRY** — Don't Repeat Yourself
-6. **TDD** — Red → Green → Refactor
-7. **Systematic debugging** — Find root cause first
-8. **Manage context** — Offload verbose data, retrieve selectively
+A janela de contexto de LLMs enche rápido. O Kraken inclui um sistema para lidar com isso:
 
----
+- **Outputs longos** (>50 linhas) são salvos em `context/` ao invés de poluir o chat
+- **Histórico de sessão** preserva decisões entre auto-compactações
+- **Logs de terminal** são redirecionados para consulta seletiva
 
-## 📚 Documentation
-
-| Document | Purpose |
-|----------|---------|
-| [AGENTS.md](./AGENTS.md) | Root agent instructions |
-| [vaults/AGENTS.md](./vaults/AGENTS.md) | Vault structure & MCP modes |
-| [context/README.md](./context/README.md) | Dynamic context system |
-| [.cursor/hooks/README.md](./.cursor/hooks/README.md) | Hook documentation |
-| [.cursor/skills/](./.cursor/skills/) | Skill library (Cursor) |
-| [CLAUDE.md](./CLAUDE.md) | Claude Code root instructions |
-| [.claude/agents/](./.claude/agents/) | Subagent library (Claude Code) |
+```bash
+/context status   # Ver uso de armazenamento
+/context clean    # Limpar arquivos > 7 dias
+/context log      # Registrar uma decisão importante
+```
 
 ---
 
-## 🔄 Dual Compatibility: Cursor + Claude Code
+## Self-Annealing: O Agente Aprende
 
-Kraken supports **both Cursor IDE and Claude Code** out of the box:
+Quando algo quebra, o Kraken não só conserta — ele melhora:
+
+```
+Erro acontece
+    ↓
+Corrige o problema
+    ↓
+Atualiza o script
+    ↓
+Testa a correção
+    ↓
+Atualiza a diretiva
+    ↓
+O sistema ficou mais forte
+```
+
+Cada erro é uma oportunidade de melhorar as diretivas. O sistema fica mais robusto com o tempo.
+
+---
+
+## Compatibilidade: Cursor + Claude Code
+
+O Kraken funciona tanto no **Cursor IDE** quanto no **Claude Code** (CLI da Anthropic). As duas configurações compartilham a mesma estrutura de projetos.
 
 | Feature | Cursor | Claude Code |
 |---------|--------|-------------|
-| Root instructions | `AGENTS.md` | `CLAUDE.md` |
-| Vault instructions | `vaults/AGENTS.md` | `vaults/CLAUDE.md` |
+| Instruções root | `AGENTS.md` | `CLAUDE.md` |
+| Instruções por diretório | `vaults/AGENTS.md` | `vaults/CLAUDE.md` |
 | Slash commands | `.cursor/commands/` | `.claude/commands/` |
-| Behavioral hooks | `.cursor/hooks/` (markdown) | `.claude/settings.json` (shell) |
-| Rules/Skills | `.cursor/rules/` + `.cursor/skills/` | Consolidated in `CLAUDE.md` |
-| Subagents | `.cursor/skills/` (on-demand) | `.claude/agents/` (persistent) |
-| Permissions | Via IDE settings | `.claude/settings.json` |
+| Guardrails | `.cursor/hooks/` (markdown) | `.claude/settings.json` (shell) |
+| Rules + Skills | `.cursor/rules/` + `.cursor/skills/` | Consolidado no `CLAUDE.md` |
+| Subagentes | `.cursor/skills/` (sob demanda) | `.claude/agents/` (persistentes) |
 
-Both configurations share the same project structure (`vaults/`, `context/`), plans, tasks, and execution scripts. Switch between tools seamlessly.
+### Subagentes (Claude Code)
 
-### Claude Code Subagents
-
-| Agent | Purpose |
-|-------|---------|
-| `code-reviewer` | Confidence-based code review |
-| `debugger` | Systematic root cause analysis |
-| `prd-creator` | PRP creation and task decomposition |
-| `code-simplifier` | Post-implementation code cleanup |
-| `tdd-coach` | Test-driven development guidance |
+| Agente | Especialidade |
+|--------|--------------|
+| `code-reviewer` | Code review com scoring de confiança |
+| `debugger` | Análise sistemática de causa raiz |
+| `prd-creator` | Criação de PRPs e decomposição em tasks |
+| `code-simplifier` | Limpeza de código pós-implementação |
+| `tdd-coach` | Guia de Test-Driven Development |
 
 ---
 
-## 🤝 Contributing
+## Princípios Operacionais
 
-1. Fork the repo
-2. Create your feature branch
-3. Follow the 3-layer architecture
-4. Run `/code-review` before submitting
-5. Use `/commit` for proper commit messages
+1. **Reutilize antes de criar** — Sempre verifique se já existe um script ou tool
+2. **Self-anneal** — Aprenda com erros, atualize diretivas
+3. **KISS** — Mantenha simples. Se tem mais de 500 linhas, divida
+4. **YAGNI** — Não construa pro futuro. Resolva o problema de agora
+5. **DRY** — Não repita código. Mudanças em um lugar só
+6. **TDD** — Escreva o teste primeiro, veja falhar, depois implemente
+7. **Debug sistemático** — Encontre a causa raiz antes de corrigir
+8. **Gerencie contexto** — Offload dados verbosos, recupere seletivamente
 
 ---
 
-## 📜 License
+## Documentação
 
-MIT — Go wild. Release your Kraken. 🦑
+| Documento | O que contém |
+|-----------|-------------|
+| [AGENTS.md](./AGENTS.md) | Instruções root do agente (Cursor) |
+| [CLAUDE.md](./CLAUDE.md) | Instruções root do agente (Claude Code) |
+| [vaults/AGENTS.md](./vaults/AGENTS.md) | Estrutura de vaults e modos MCP |
+| [context/README.md](./context/README.md) | Sistema de contexto dinâmico |
+| [.cursor/hooks/README.md](./.cursor/hooks/README.md) | Documentação dos hooks |
+| [.cursor/skills/](./.cursor/skills/) | Biblioteca de skills (Cursor) |
+| [.claude/agents/](./.claude/agents/) | Biblioteca de subagentes (Claude Code) |
+
+---
+
+## Contribuindo
+
+1. Fork o repositório
+2. Crie sua feature branch
+3. Siga a arquitetura de 3 camadas
+4. Rode `/code-review` antes de submeter
+5. Use `/commit` para mensagens de commit padronizadas
+
+---
+
+## Licença
+
+MIT — Use, modifique, distribua. Solte o Kraken. 🦑
 
 ---
 
 <p align="center">
   <strong>🦑 Release the Kraken!</strong><br>
-  <em>Tame the chaos. Ship with confidence.</em>
+  <em>Domine o caos. Entregue com confiança.</em>
 </p>
